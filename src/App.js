@@ -12,7 +12,7 @@ class App extends Component {
   constructor() {
     super();    
     this.state = {
-      title: 'Recipe Thyme',
+      title: 'API Requests for Dummies',
       recipes: []
     }
   }
