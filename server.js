@@ -1,18 +1,70 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let morgan = require('morgan');
-let pg = require('pg');
+// let pg = require('pg');
+const { Pool, Client } = require('pg')
 let cors = require('cors');
 const PORT = 3000;
 
-let pool = new pg.Pool({
-  user: 'postgres',
-  database: 'tiffanylin',  
-  password: 'Chickens1',
-  host: 'localhost',
-  port: 5438,  
-  max: 10
-});
+const connectionString = 'postgres://lntjpzrb:WqEJbb3UKzjRlZ9SfCFO7GQ4itHsYl9j@baasu.db.elephantsql.com:5432/lntjpzrb';
+
+// const pool = new Pool({
+//   // user: 'postgres',
+//   // database: 'tiffanylin',  
+//   // password: 'Chickens1',
+//   // host: 'localhost',
+//   // port: 5438,  
+//   // max: 10
+//   connectionString: connectionString,
+//   user: 'lntjpzrb',
+//   database: 'lntjpzrb',
+//   password: 'WqEJbb3UKzjRlZ9SfCFO7GQ4itHsYl9j'
+// });
+
+const client = new Client({
+  connectionString: connectionString,
+})
+
+client.connect()
+
+// client.query('CREATE TABLE PERSONS (PersonID int, LastName varchar, LITTLEpuPPie varchar);', (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
+
+// client.query('SELECT * FROM PERSONS', (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
+
+// client.query('CREATE TABLE PERSONS2 (LITTLEpuPPie varchar);', (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
+
+
+// client.query('CREATE TABLE PERSONS3 (littleKitten varchar);', (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
+
+
+// client.query('INSERT INTO PERSONS3 (littleKitten) VALUES ($1)',["Cat"], (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
+
+
+// client.query('INSERT INTO PERSONS3 (littleKitten) VALUES ($1)',["cow"], (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
+
+// client.query('SELECT * FROM PERSONS3', (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
+
 
 let app = express();
 app.use(cors());
