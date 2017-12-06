@@ -95,8 +95,11 @@ class App extends Component {
   }
 
   hanndleChange() {
-    // document.getElementById('s_id').value = " ";
+    document.getElementById('s_id').value = " ";
     document.getElementById('s_id').value = document.getElementById('id').value; 
+    document.getElementById('s_request').value = document.getElementById('request').value; 
+    document.getElementById('s_path').value = document.getElementById('c_path').value; 
+
 
   }
 
@@ -138,10 +141,12 @@ class App extends Component {
                   <TextField
                     hintText="Request Type"
                     id="request" //changed it from c_request
+                    onChange={this.hanndleChange.bind(this)}
                   /><br />
                   <TextField
                     hintText="Path"
                     id="c_path"
+                    onChange={this.hanndleChange.bind(this)}
                   /><br />
                   <TextField
                     hintText="Component"
@@ -166,7 +171,6 @@ class App extends Component {
                     hintText="ID"
                     id="s_id" //changed back to s_id
                     name="s_id"
-                    onChange="id.value = s_id.value; return true;"
                     errorText="This field is required"
                   /><br />
                   <TextField
