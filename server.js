@@ -90,8 +90,8 @@ app.post("/api/submit", function(req, res) {
 
 
 //under componentDidMount
-app.get('/receive', function(request, response) {
-  pool.connection(function(err, db, done) {
+app.get('/api/receive', function(request, response) {
+  pool.connect(function(err, db, done) {
     if (err) {
       return response. status(400).send(err);
     }
@@ -103,6 +103,7 @@ app.get('/receive', function(request, response) {
           return response.status(400).send(err);
         }
         else {
+          console.log(table.rows)
           return response.status(200).send(table.rows);
         }
       })
