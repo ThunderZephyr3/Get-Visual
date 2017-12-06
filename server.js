@@ -112,68 +112,26 @@ app.get('/api/receive', function(request, response) {
 })
 
 
-
-
-// // pool.query('CREATE TABLE ClIENT (ID numeric, Request varchar, Path varchar, Component varchar, Goal varchar, Additional varchar);', (err, res) => {
-// //   console.log(err, res)
-// //   pool.end()
-// // })
-
-// let test = ["test","test","test","test","test","test"]
-
-// pool.query('INSERT INTO ClIENT (ID, Request, Path, Component, Goal, Additional) VALUES ($1, $2, $3, $4, $5, $6);', [...test], (err, res) => {
-//   console.log(err, res)
-//   pool.end()
-// })
-
-// const client = new Client({
-//   connectionString: connectionString,
-// })
-
-// client.connect()
-
-// client.query('CREATE TABLE ClIENT (ID numeric, Request varchar, Path varchar, Component varchar, Goal varchar, Additional varchar);', (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
-
-// client.query('INSERT INTO ClIENT (ID, Request, Path, Component, Goal, Additional) VALUES ($1, $2, $3, $4, $5, $6);', [...test], (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
-
-// client.query('SELECT * FROM PERSONS', (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
-
-// client.query('CREATE TABLE PERSONS2 (LITTLEpuPPie varchar);', (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
-
-
-// client.query('CREATE TABLE PERSONS3 (littleKitten varchar);', (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
-
-
-// client.query('INSERT INTO PERSONS3 (littleKitten) VALUES ($1)',["Cat"], (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
-
-
-// client.query('INSERT INTO PERSONS3 (littleKitten) VALUES ($1)',["cow"], (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
-
-// client.query('SELECT * FROM PERSONS3', (err, res) => {
-//   console.log(err, res)
-//   client.end()
-// })
+//delete request
+app.delete('/api/remove/:id', function(request, response) {
+  const id = request.params.id;
+  pool.connect(function(err, db, done) {
+    if (err) {
+      return response.status(400).send(err);
+    } 
+    else {
+      db.query('DELETE FROM cards WHERE id = $1', [Number(id)], function(err, result) {
+        done();
+        if(err) {
+          return response.status(400).send(err);
+        } 
+        else {
+          return response.status(200).send({message: 'Success in deleting record'})
+        }
+      })
+    }
+  })
+})
 
 
 app.listen(PORT, () => console.log('Listening on port ' + PORT));
