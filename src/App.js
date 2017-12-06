@@ -24,6 +24,7 @@ class App extends Component {
       .then(function(response) {
         response.json()
           .then(function(data) {
+            console.log(data);
             that.setState({
               requests:data
             })
@@ -75,22 +76,22 @@ class App extends Component {
   removeData(id) {
 
     var that = this; 
-    let requests = this.state.requests;
+    let requests = this.state.requests; //[]
     let request = requests.find(function(request) {
       return request.id === id
     });
 
-    var requestFETCH = new Request("http://localhost:3000/api/remove" + id, {
+    var requestFETCH = new Request("http://localhost:3000/api/remove/" + id, {
       method: 'DELETE'
     })
 
     fetch(requestFETCH)
       .then(function(response) {
-        requests.splice(request.indexOf(request), 1)
+        requests.splice(requests.indexOf(request), 1)
         that.setState({
           requests : requests
         })
-        response.json()
+        // response.json()
       })
   }
 
@@ -99,7 +100,7 @@ class App extends Component {
     let title = this.state.title;
     let requests = this.state.requests;
     const results = [];
-    this.state.requests.forEach((elem,i) => {
+    requests.forEach((elem,i) => {
       results.push(<Cards key={i} 
                     id={elem.id} 
                     request={elem.request} 
@@ -110,12 +111,14 @@ class App extends Component {
                     serverPath={elem.s_path} 
                     serverUrl={elem.s_url} 
                     serverPurpose={elem.s_purpose} 
-                    serverInfo={elem.s_moreInfo} />);
+                    serverInfo={elem.s_moreInfo}
+                    remove={this.removeData.bind(this, elem.id)} />);
     });
 
 
     return (
         <MuiThemeProvider>
+        <div className="App">
           <form ref="apiForm">
             <h1>{title}</h1>
             <div id="formContainer">
@@ -192,8 +195,11 @@ class App extends Component {
                   /><br />
                 </div>
                 <button id="btnPrimary" onClick={this.addInputFields.bind(this)}>Create Data Flow Diagram</button>
-              </div>
+            </div>
           </form>
+          <hr></hr>
+          {results}
+          </div>
         </MuiThemeProvider>
     )
   }
