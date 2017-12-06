@@ -99,6 +99,7 @@ class App extends Component {
     document.getElementById('s_id').value = document.getElementById('id').value; 
     document.getElementById('s_request').value = document.getElementById('request').value; 
     document.getElementById('s_path').value = document.getElementById('c_path').value; 
+    console.log(document.getElementById('c_path').value)
 
 
   }
