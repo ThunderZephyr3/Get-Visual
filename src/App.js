@@ -94,6 +94,11 @@ class App extends Component {
       })
   }
 
+  hanndleChange() {
+    // document.getElementById('s_id').value = " ";
+    document.getElementById('s_id').value = document.getElementById('id').value; 
+
+  }
 
   render () {
     let title = this.state.title;
@@ -126,6 +131,8 @@ class App extends Component {
                   <TextField
                     hintText="ID"
                     id="id" //changed it from c_id
+                    name="id"
+                    onChange={this.hanndleChange.bind(this)}
                   errorText="This field is required"
                   /><br />
                   <TextField
@@ -144,13 +151,13 @@ class App extends Component {
                     hintText="Purpose"
                     id="c_purpose"
                     multiLine={true}
-                    rows={2}
+                    rows={1}
                   /><br />
                   <TextField
                     hintText="Additional Info"
                     id="c_moreInfo"
                     multiLine={true}
-                    rows={2}
+                    rows={1}
                   /><br />
               </div>
               <div id="serverSideInput">
@@ -158,6 +165,8 @@ class App extends Component {
                   <TextField
                     hintText="ID"
                     id="s_id" //changed back to s_id
+                    name="s_id"
+                    onChange="id.value = s_id.value; return true;"
                     errorText="This field is required"
                   /><br />
                   <TextField
@@ -176,13 +185,13 @@ class App extends Component {
                     hintText="Purpose"
                     id="s_purpose"
                     multiLine={true}
-                    rows={2}
+                    rows={1}
                   /><br />
                   <TextField
                     hintText="Additional Info"
                     id="s_moreInfo"
                     multiLine={true}
-                    rows={2}
+                    rows={1}
                   /><br />
                 </div>
                 <div class="clear"></div>
