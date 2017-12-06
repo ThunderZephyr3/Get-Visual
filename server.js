@@ -190,25 +190,6 @@ app.get('/receive', function(request, response) {
 //   })
 // })
 
-// app.get('/api/recipes', function(request, response) {
-//   pool.connect(function(err, db, done) {
-//     if(err) {
-//       return response.status(400).send(err);
-//     }
-//     else {
-//       db.query('SELECT * FROM recipes', function(err, table) {
-//         done();
-//         if(err) {
-//           console.log('table', table);
-//           return response.status(400).send(err);
-//         }
-//         else {
-//           return response.status(200).send(table.rows);
-//         }
-//       })
-//     }
-//   })
-// })
 
 // app.post('/api/new-recipe', function(request, response) {
 //   var recipe_name = request.body.recipe_name;
@@ -237,4 +218,3 @@ app.get('/receive', function(request, response) {
 // })
 
 app.listen(PORT, () => console.log('Listening on port ' + PORT));
-
