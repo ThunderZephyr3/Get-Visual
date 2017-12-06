@@ -17,19 +17,19 @@ class App extends Component {
   }
 
 
-  // componentDidMount() {
-  //   console.log('component has mounted')
-  //   var that = this; 
-  //   fetch('http://localhost:3000/api/receive')
-  //     .then(function(response) {
-  //       response.json()
-  //         .then(function(data) {
-  //           that.setState({
-  //             requests:data
-  //           })
-  //         })
-  //       })
-  //     }
+  componentDidMount() {
+    console.log('component has mounted')
+    var that = this; 
+    fetch('http://localhost:3000/api/receive')
+      .then(function(response) {
+        response.json()
+          .then(function(data) {
+            that.setState({
+              requests:data
+            })
+          })
+        })
+      }
 
 
 
@@ -67,7 +67,7 @@ class App extends Component {
     }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      // console.log(data)
+      console.log(data)
     })
   };
 
