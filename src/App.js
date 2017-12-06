@@ -53,11 +53,11 @@ class App extends Component {
     };
 
 
-   // let requests = that.state.requests;
-   //    requests.push(inputData);
-   //    that.setState({
-   //      requests: requests
-   //  })
+   let requests = that.state.requests;
+      requests.push(inputData);
+      that.setState({
+        requests: requests
+    })
 
   
     fetch('http://localhost:3000/api/submit', {
@@ -71,8 +71,49 @@ class App extends Component {
     })
   };
 
+
+  removeData(id) {
+
+    var that = this; 
+    let requests = this.state.requests;
+    let request = requests.find(function(request) {
+      return request.id === id
+    });
+
+    var requestFETCH = new Request("http://localhost:3000/api/remove" + id, {
+      method: 'DELETE'
+    })
+
+    fetch(requestFETCH)
+      .then(function(response) {
+        requests.splice(request.indexOf(request), 1)
+        that.setState({
+          requests : requests
+        })
+        response.json()
+      })
+  }
+
+
   render () {
     let title = this.state.title;
+    let requests = this.state.requests;
+    const results = [];
+    this.state.requests.forEach((elem,i) => {
+      results.push(<Cards key={i} 
+                    id={elem.id} 
+                    request={elem.request} 
+                    clientPath={elem.c_path} 
+                    clientComponent={elem.c_component} 
+                    clientPurpose={elem.c_purpose} 
+                    clientInfo={elem.c_moreInfo} 
+                    serverPath={elem.s_path} 
+                    serverUrl={elem.s_url} 
+                    serverPurpose={elem.s_purpose} 
+                    serverInfo={elem.s_moreInfo} />);
+    });
+
+
     return (
         <MuiThemeProvider>
           <form ref="apiForm">
